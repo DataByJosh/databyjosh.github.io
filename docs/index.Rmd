@@ -1,8 +1,5 @@
 ---
-title: "Personal Website"
-output:
-  html_document:
-    theme: yeti
+title: <p style="text-align:center;"><img src="images/colourlogo.png" style="width:640px;height:125px"></p>
 ---
 
-Hello, World!
+Content coming soon. Stay tuned...
