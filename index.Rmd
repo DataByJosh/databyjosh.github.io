@@ -1,5 +1,3 @@
----
-title: "Home page place holder."
----
+<img src="files/colourlogo.png" style="width:100%">
 
-Stay tuned, content is coming.
+Content is on the way. Stay tuned :)
