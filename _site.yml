@@ -1,8 +1,0 @@
-name: "data-by-josh"
-navbar:
-  left:
-    - text: "Home"
-      href: index.html
-output:
-  html_document:
-    theme: yeti
