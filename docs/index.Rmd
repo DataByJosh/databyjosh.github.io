@@ -1,5 +1,0 @@
----
-title: <p style="text-align:center;"><img src="images/colourlogo.png" style="width:640px;height:125px"></p>
----
-
-Content coming soon. Stay tuned...
