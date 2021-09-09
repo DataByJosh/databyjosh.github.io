@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>matchchains.knit</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="shortcut icon" href="images/browserlogo.png" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Data by Josh</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="mailto:&lt;josh@databyjosh.com&gt;">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/databyjosh">
+    <span class="fa fa-twitter fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore"><p style="text-align:center;">
+<img src="images/colourlogo.png" style="width:100%;">
+</p></h1>
+
+</div>
+
+
+<div id="scraping-aflm-match-chains-and-kick-in-play-on-analysis" class="section level1">
+<h1>Scraping AFLM Match Chains and Kick-in Play-on Analysis</h1>
+<pre class="r"><code>library(data.table)
+library(devtools)
+library(dplyr)
+library(httr)
+library(jsonlite)
+library(lubridate)
+library(plotly)
+library(stringr)
+library(tidyr)</code></pre>
+<p>If you’ve used the AFL app recently then you have likely noticed the arrival of a new and convoluted feature: the Augmented Reality (AR) Tracker, which - if you can satisfy its demands for a flat surface to project onto - will display some pretty nifty data showing the the field location and outcomes of kicks, handballs, and shots at goal.</p>
+<p>It’s a bit like the 3D-camera that came attached to my first smartphone. It sounds sleek and sexy in a pitch, and piques the interest enough to get a couple of uses when it first arrives - but within a week it’s forgotten forever. Cool-factor aside, it’s just not that insightful to see the data like this.</p>
+<p>Perhaps you, like me, have glanced at the AR Tracker and idly daydreamed about getting a hold of the raw data that powers it. That dream is now a reality. Here you’ll find a guide on how to acces it - and a little analysis on kicking in and playing on just for fun.</p>
+<div id="the-data" class="section level2">
+<h2>The Data</h2>
+<p>To access the data, I have two options for you.</p>
+<p>The first is a script of R functions for scraping the data. The script is stored on GitHub. If you’ve installed and loaded the devtools package in R, you can load the script with a line of code.</p>
+<pre class="r"><code>source_url(&quot;https://raw.githubusercontent.com/DataByJosh/AFL-Data/main/AFLM_Match_Chains/Scraper.R&quot;)</code></pre>
+<p>This will load nine functions into your R session. The only one intended for direct use is <strong>get_match_chains(season, round)</strong>.</p>
+<p>Season will default to your system year if left blank. There isn’t currenly any data available for past season, so 2021 is the only worthwhile value you can write in here, for now.</p>
+<p>Round will default to all rounds if left blank. So, if you want to scrape a whole season at once, blankj is the way to go. If you do want to specify a round, note that finals rounds are still referred to by number - for example, the first week of finals is 24.</p>
+<pre class="r"><code>data &lt;- get_match_chains(2021)</code></pre>
+<p>A pleasant surprise about this dataset is that it contains far more information than is actually visible currently on the AR Tracker. It records more than 70 different statistical events in a time series broken up into chains of possession, each possessing x and y coordinates describing where the event happened on the field. There are venue dimensions, too.</p>
+<p>If you’re not keen on using R to get the data, or finding something broken in the scraper, the second option is a bit more universal and foolproof - <a href="https://github.com/DataByJosh/AFL-Data/tree/main/AFLM_Match_Chains/csvs">all the data is available in round-by-round csvs on GitHub.</a></p>
+</div>
+<div id="kicking-in-and-playing-on" class="section level2">
+<h2>Kicking in and playing on</h2>
+<p>Such richly detailed data opens up many possibilities for analysis. As a first baby step, I’m going to take a brief and simple look at the first topic that popped into my heads. Kick-ins - should you play-on or not?</p>
+<p>In 2019 the AFL loosened up the rules around kick-ins, providing incentive to for players taking the kick to play on. Defenders have taken up that incentive with gusto, and in doing so sparked some debate over players padding their stats.</p>
+<p>Some high-minded part of my me wants to believe that, professionals that they are, footy players are not making the decision to play-on or not from a kick-in solely to add to their disposal count.</p>
+<p>However, they’re only human. Given an easy way to make ourselves look good at our jobs on paper, I suspect most of us would fail to resist temptation - I know I would.</p>
+<p>But is this selfish stat-padding that hurts the team? Or are kick-in play-on chains more likely to end in a score, thereby entirely justifying the decision to stuff one’s stats?</p>
+<p>To start answering that question, I’ll filter the dataset down to just the kick-ins. In the data, kicking in after a behind is referred to as a “Kickin”, providing a convenient distinction from simillarly labelled events like “Kick into F50” or “OOF Kick in”. I’ll also filter out any data from the finals matches that have occured so far this year.</p>
+<pre class="r"><code>kick_in_data &lt;- data %&gt;% filter(description %like% &quot;Kickin&quot;)
+kick_in_data &lt;- kick_in_data %&gt;% filter(roundNumber &lt;= 23)</code></pre>
+<p>We are left with more than 4000 kick-ins from 2021, a very robust dataset. Let’s start with the basics - how often do players kick-in and play-on?</p>
+<pre class="r"><code>prop.table(table(kick_in_data$description))</code></pre>
+<pre><code>## 
+##    Kickin long Kickin play on   Kickin short 
+##    0.008351756    0.828543355    0.163104888</code></pre>
+<p>It’s clear that playing on has become the vastly preferred option, used 82.9% of the time. We may not have and pre-2019 data to compare this too, but there’s no doubt this represent a significant shift in player behaviour at kick-ins.</p>
+<p>In particular, the rule changes have just about killed the long kick-in from the goalsquare, which is now represents less than one percent of all kick-ins.</p>
+<p>We know how kick-in chains start, so let’s look at how they end. The finalState variable in the dataset records for each event how the chain it belongs to ended. Given how the very low number of long kick-ins, I’m going to roll them in with the short ones.</p>
+<pre class="r"><code>kick_in_data$description &lt;- kick_in_data$description %&gt;% str_replace(&quot;Kickin long&quot;, &quot;Does not play-on&quot;)
+kick_in_data$description &lt;- kick_in_data$description %&gt;% str_replace(&quot;Kickin play on&quot;, &quot;Play-on&quot;)
+kick_in_data$description &lt;- kick_in_data$description %&gt;% str_replace(&quot;Kickin short&quot;, &quot;Does not play-on&quot;)
+
+prop.table(table(kick_in_data$description,kick_in_data$finalState), 1)</code></pre>
+<pre><code>##                   
+##                     ballUpCall      behind  endQuarter        goal outOfBounds
+##   Does not play-on 0.058739255 0.044412607 0.011461318 0.050143266 0.164756447
+##   Play-on          0.071449748 0.025793063 0.010969463 0.046842573 0.164838423
+##                   
+##                         rushed    turnover
+##   Does not play-on 0.007163324 0.663323782
+##   Play-on          0.008301216 0.671805514</code></pre>
+<p>Before anything else, we must acknowledge that kick-ins simply don’t generate a lot of scores. Whethery playing on or, the most kick-in chains end with the ball being turned over, out of bounds, or balled up.</p>
+<p>When it comes as kick-in chains that do hit the scoreboard, the news for fans of playing on is not great. 4.7% of kick-in chains end in goals if the kicker plays on, 5% if not. The gap between the two is hardly a gorge, but ‘more goals’ simply isn’t available as an argument in favour our playing on.</p>
+<p>Starting at the raw numbers above is to enough to make anyone’s eye’s glaz over - let’s add some visuals. We’re going to cut it down to just goals behinds and put these in a bar chart to get a better look at them. Move your cursor over the bars to see the percentage values.</p>
+<pre class="r"><code>plot_data &lt;- as.data.frame(prop.table(table(kick_in_data$description,kick_in_data$finalState), 1))
+plot_data &lt;- plot_data %&gt;% spread(Var2, Freq)
+
+plot &lt;- plot_ly(plot_data,
+                x = ~Var1,
+                y = ~goal,
+                type = &quot;bar&quot;,
+                name = &quot;Goal&quot;,
+                hovertemplate = &quot;%{y:.1%}&quot;) %&gt;%
+  add_trace(y = ~behind,
+            name = &quot;Behind&quot;,
+                hovertemplate = &quot;%{y:.1%}&quot;) %&gt;%
+  layout(barmode = &quot;group&quot;,
+         title = &quot;&lt;b&gt;Percentage of kick-in chains that ended in scoring shots - 2021 Home &amp; Away&lt;/b&gt;&quot;,
+         xaxis = list(title = &quot;&lt;b&gt;Type of kick-in&lt;/b&gt;&quot;, categoryorder = &quot;array&quot;, categoryarray = c(&quot;Play-on&quot;,&quot;Does not play-on&quot;)),
+         yaxis = list(title = &quot;&quot;,tickformat = &quot;.1%&quot;),
+         legend = list(title=list(text=&quot;&lt;b&gt;Type of score&lt;/b&gt;&quot;))) %&gt;%
+  config(displayModeBar = FALSE)
+
+plot</code></pre>
+<div id="htmlwidget-c658fe2a0a3d7df0d0ed" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c658fe2a0a3d7df0d0ed">{"x":{"visdat":{"510436fe2a03":["function () ","plotlyVisDat"]},"cur_data":"510436fe2a03","attrs":{"510436fe2a03":{"x":{},"y":{},"hovertemplate":"%{y:.1%}","name":"Goal","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"},"510436fe2a03.1":{"x":{},"y":{},"hovertemplate":"%{y:.1%}","name":"Behind","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"barmode":"group","title":"<b>Percentage of kick-in chains that ended in scoring shots - 2021 Home & Away<\/b>","xaxis":{"domain":[0,1],"automargin":true,"title":"<b>Type of kick-in<\/b>","categoryorder":"array","categoryarray":["Play-on","Does not play-on"],"type":"category"},"yaxis":{"domain":[0,1],"automargin":true,"title":"","tickformat":".1%"},"legend":{"title":{"text":"<b>Type of score<\/b>"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false,"displayModeBar":false},"data":[{"x":["Does not play-on","Play-on"],"y":[0.0501432664756447,0.0468425733768159],"hovertemplate":["%{y:.1%}","%{y:.1%}"],"name":"Goal","type":"bar","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Does not play-on","Play-on"],"y":[0.0444126074498567,0.0257930625555885],"hovertemplate":["%{y:.1%}","%{y:.1%}"],"name":"Behind","type":"bar","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>Kick-in play-on aficionados can hang their hats on one thing. These chains may be less likely to hit the scoreboard, but if they do, that score is more likely to be a goal.</p>
+<p>This feels like a logical result. The faster a team moves the ball, the more likely they’ll get ahead of the opposition defence and create a favourable shot at goal - provided they make it there.</p>
+<p>This ‘taking the game on’ that so is often spruiked by the commentary box undoubtedly adds some pizazz to the experience of watching football. And when it works, it works well.</p>
+<p>But, boring though it may be, the numbers suggest - when it comes to kick-ins at least - short, slow and steady wins the race.</p>
+<p>Of course, this analysis is just the tip of the iceberg when it comes not just to kick-ins, but the match chains dataset itself. The answers to dozens of fascinating footy questions are buried in there somewhere.</p>
+<p>If you are so inclined, please avail yourself of the data. I can’t wait to see what you produce.</p>
+</div>
+</div>
+
+&nbsp;
+<hr />
+<p style="text-align: center;"><b>Feedback, corrections, coding tips, questions and suggestions are always welcome.</b></p>
+<p style="text-align: center;"><b><a href="mailto:josh@databyjosh.com">Email</a> | <a href="https://twitter.com/databyjosh">Twitter</a></b></p>
+&nbsp;
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
