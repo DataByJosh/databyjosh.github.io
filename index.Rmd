@@ -1,8 +1,0 @@
----
-title: <p style="text-align:center;"><img src="images/colourlogo.png" style="width:100%;"></p>
-pagetitle: "Data by Josh"
----
-
-<p style="text-align:center;"><a href="aflm-tips"><img src="images/button-aflm-tips-full.png" style="width:750px;height:180px;"></a></p>
-
-<p style="text-align:center;"><a href="aflw-tips"><img src="images/button-aflw-tips-full.png" style="width:750px;height:180px;"></a></p>
