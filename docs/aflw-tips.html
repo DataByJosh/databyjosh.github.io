@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>AFLW Tips | Data by Josh</title>
+
+<script src="site_libs/header-attrs-2.26/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="site_libs/core-js-2.5.3/shim.min.js"></script>
+<script src="site_libs/react-18.2.0/react.min.js"></script>
+<script src="site_libs/react-18.2.0/react-dom.min.js"></script>
+<script src="site_libs/reactwidget-1.0.0/react-tools.js"></script>
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="site_libs/reactable-0.4.4/reactable.css" rel="stylesheet" />
+<script src="site_libs/reactable-binding-0.4.4/reactable.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+<link rel="shortcut icon" href="images/browserlogo.png" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Data by Josh</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Tips
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="aflm-tips.html">AFLM</a>
+    </li>
+    <li>
+      <a href="aflw-tips.html">AFLW</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="mailto:&lt;josh@databyjosh.com&gt;">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/databyjosh">
+    <span class="fa fa-twitter fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore"><p style="text-align:center;"><br />
+<img src="images/colourlogo.png" style="width:100%;"><br />
+</p></h1>
+
+</div>
+
+
+<div id="aflw-tips" class="section level1">
+<h1><strong>AFLW Tips</strong></h1>
+<p>Displayed on this page are the predictions and results recorded by my
+AFLW tipping model in season 2023. An FAQ is available at the bottom of
+the page.</p>
+<hr />
+<div class="reactable html-widget html-fill-item" id="htmlwidget-6ee803861827a9eaf9e4" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-6ee803861827a9eaf9e4">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"games":["Games Completed"],"xtips":["Expected Tips"],"atips":["Correct Tips"],"accuracy":["Accuracy⠀"],"mae":["MAE"],"bits":["Bits"]},"columns":[{"id":"games","name":"96","type":"character","na":"–","align":"center","vAlign":"top","headerVAlign":"top","className":"cell"},{"id":"xtips","name":"69.5","type":"character","na":"–","align":"center","vAlign":"top","headerVAlign":"top","className":"cell"},{"id":"atips","name":"60","type":"character","na":"–","align":"center","vAlign":"top","headerVAlign":"top","className":"cell"},{"id":"accuracy","name":"62.5%","type":"character","na":"–","align":"center","vAlign":"top","headerVAlign":"top","className":"cell"},{"id":"mae","name":"19.48","type":"character","na":"–","align":"center","vAlign":"top","headerVAlign":"top","className":"cell"},{"id":"bits","name":"10.82","type":"character","na":"–","align":"center","vAlign":"top","headerVAlign":"top","className":"cell"}],"sortable":false,"borderless":true,"theme":{"borderWidth":0,"cellPadding":0,"headerStyle":{"fontSize":35,"fontWeight":"bold","height":40},"rowStyle":{"fontSize":15,"fontWeight":"normal","color":"dimgrey","height":30}},"dataKey":"dc9796fd9f01e5c5e9d0f9ad8878fbac"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<hr />
+<div class="reactable html-widget html-fill-item" id="htmlwidget-8dce18f4733594960152" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-8dce18f4733594960152">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"round":["PF","PF","SF","SF","PF","EF","EF","PF","10","10","10","10","10","10","10","10","10","9","9","9","9","9","9","9","9","9","8","8","8","8","8","8","8","8","8","7","7","7","7","7","7","7","7","7","6","6","6","6","6","6","6","6","6","5","5","5","5","5","5","5","5","5","4","4","4","4","4","4","4","4","4","3","3","3","3","3","3","3","3","3","2","2","2","2","2","2","2","2","2","1","1","1","1","1","1","1","1","1"],"icon":["ge.png","nm.png","me.png","ad.png","me.png","ge.png","sy.png","ad.png","fr.png","co.png","st.png","me.png","ad.png","ge.png","pa.png","nm.png","es.png","ha.png","ad.png","co.png","ge.png","wc.png","es.png","bl.png","me.png","gc.png","es.png","fr.png","ge.png","me.png","gc.png","ca.png","ad.png","wb.png","ri.png","me.png","co.png","nm.png","ri.png","bl.png","ha.png","ge.png","st.png","ad.png","nm.png","ri.png","ge.png","bl.png","pa.png","st.png","me.png","gw.png","wb.png","ad.png","bl.png","nm.png","co.png","pa.png","wb.png","ca.png","ri.png","me.png","gc.png","co.png","fr.png","nm.png","sy.png","ge.png","ri.png","ad.png","me.png","bl.png","co.png","ca.png","st.png","fr.png","me.png","ad.png","gw.png","nm.png","me.png","es.png","nm.png","co.png","wb.png","ge.png","bl.png","gc.png","ad.png","fr.png","gw.png","bl.png","nm.png","ha.png","ge.png","ad.png","gc.png","me.png"],"winner":["Geelong","North Melbourne","Melbourne","Adelaide","Melbourne","Geelong","Sydney","Adelaide","Fremantle","Collingwood","St Kilda","Melbourne","Adelaide","Geelong","Port Adelaide","North Melbourne","Essendon","Hawthorn","Adelaide","Collingwood","Geelong","West Coast","Essendon","Brisbane","Melbourne","Gold Coast","Essendon","Fremantle","Geelong","Melbourne","Gold Coast","Carlton","Adelaide","Bulldogs","Richmond","Melbourne","Collingwood","North Melbourne","Richmond","Brisbane","Hawthorn","Geelong","St Kilda","Adelaide","North Melbourne","Richmond","Geelong","Brisbane","Port Adelaide","St Kilda","Melbourne","GWS","Bulldogs","Adelaide","Brisbane","North Melbourne","Collingwood","Port Adelaide","Bulldogs","Carlton","Richmond","Melbourne","Gold Coast","Collingwood","Fremantle","North Melbourne","Sydney","Geelong","Richmond","Adelaide","Melbourne","Brisbane","Collingwood","Carlton","St Kilda","Fremantle","Melbourne","Adelaide","GWS","North Melbourne","Melbourne","Essendon","North Melbourne","Collingwood","Bulldogs","Geelong","Brisbane","Gold Coast","Adelaide","Fremantle","GWS","Brisbane","North Melbourne","Hawthorn","Geelong","Adelaide","Gold Coast","Melbourne"],"loser":["Brisbane","Adelaide","Geelong","Sydney","North Melbourne","Essendon","Gold Coast","Brisbane","Sydney","Richmond","Carlton","Brisbane","West Coast","Hawthorn","GWS","Bulldogs","Gold Coast","Port Adelaide","North Melbourne","Sydney","Richmond","Bulldogs","Carlton","St Kilda","Fremantle","GWS","West Coast","St Kilda","Collingwood","North Melbourne","Port Adelaide","GWS","Brisbane","Sydney","Hawthorn","West Coast","Carlton","Port Adelaide","Essendon","Gold Coast","Sydney","Fremantle","GWS","Bulldogs","Fremantle","Gold Coast","Essendon","Collingwood","Sydney","Hawthorn","Adelaide","West Coast","Carlton","Gold Coast","Hawthorn","GWS","Essendon","West Coast","St Kilda","Sydney","Fremantle","Geelong","Bulldogs","St Kilda","Essendon","Brisbane","West Coast","Port Adelaide","Carlton","GWS","Hawthorn","Sydney","Gold Coast","West Coast","Port Adelaide","Hawthorn","Bulldogs","Essendon","Richmond","Geelong","GWS","St Kilda","Carlton","Fremantle","Hawthorn","Sydney","Port Adelaide","West Coast","Richmond","West Coast","Sydney","Richmond","St Kilda","Essendon","Bulldogs","Port Adelaide","Carlton","Collingwood"],"margin":[10,5,7,24,2,24,5,4,2,2,2,10,25,20,3,45,13,6,8,14,3,4,4,21,37,17,21,1,1,8,11,17,7,1,18,44,3,45,15,15,4,23,4,48,34,2,16,20,1,5,5,9,2,23,22,35,6,4,3,14,18,13,11,14,14,14,5,34,7,30,36,41,6,14,18,12,32,21,1,1,27,5,22,1,13,35,29,19,11,29,28,12,16,5,6,42,4,26],"probability":[0.67,0.58,0.63,0.86,0.53,0.86,0.58,0.58,0.53,0.54,0.54,0.67,0.88,0.83,0.56,0.98,0.72,0.6,0.65,0.74,0.56,0.57,0.57,0.83,0.96,0.79,0.83,0.53,0.53,0.65,0.69,0.78,0.63,0.52,0.8,0.98,0.55,0.98,0.76,0.76,0.57,0.86,0.57,0.99,0.94,0.54,0.77,0.82,0.51,0.6,0.58,0.65,0.53,0.85,0.83,0.94,0.61,0.57,0.56,0.73,0.8,0.72,0.69,0.74,0.73,0.73,0.6,0.94,0.63,0.91,0.95,0.97,0.61,0.74,0.79,0.7,0.92,0.83,0.51,0.52,0.89,0.59,0.85,0.52,0.73,0.95,0.91,0.82,0.7,0.91,0.91,0.7,0.78,0.6,0.61,0.97,0.57,0.89],"result":[2,2,0,1,0,1,1,0,0,0,1,0,1,1,1,1,0,1,1,0,1,0,1,0,1,1,0,1,0,1,0,0,0,0,1,1,1,1,0,1,1,1,1,1,1,0,0,0,0,1,0,1,0,1,1,1,1,0,0,1,0,1,1,0,0,0,1,1,1,1,1,1,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,0,0,1,0,1,1,0,1],"abserr":["NA","NA",12.41915,42.88018,42.51347,6.2099,12.39072,6.44718,23.85717,54.37445,17.61307,34.88897,0.60352,19.50495,54.83636,1.13066999999999,26.65456,2,5,33,35,12,28,42,4,14,25,23,7,15,11,19,10,58,7,26,14,18,32,21,10,1,9,6,11,3,26,25,16,4,15,11,21,9,5,5,14,10,21,9,25,36,7,26,34,16,8,6,0,39,33,14,18,39,26,1,10,26,20,8,50,7,38,20,20,8,21,54,18,21,33,18,24,24,42,12,6,16],"bits":[null,null,"-0.44","0.78","-0.08","0.78","0.22","-0.25","-0.1","-0.13","0.12","-0.62","0.81","0.72","0.16","0.97","-0.83","0.27","0.37","-0.93","0.17","-0.21","0.18","-1.58","0.93","0.65","-1.59","0.08","-0.08","0.38","-0.11","-1.22","-0.43","-7.0000000000000007E-2","0.68","0.97","0.15","0.97","-1.04","0.6","0.18","0.78","0.2","0.98","0.91","-0.12","-1.0900000000000001","-1.47","-0.03","0.25","-0.27","0.39","-0.1","0.77","0.74","0.92","0.28999999999999998","-0.23","-0.18","0.55000000000000004","-1.3","0.53","0.46","-0.93","-0.88","-0.88","0.26","0.91","0.32","0.86","0.92","0.95","-0.38","0.56000000000000005","-1.29","0.49","0.88","0.72","-0.04","0.06","0.83","0.25","0.76","0.05","-0.9","0.92","0.87","0.71","0.49","0.87","-2.41","-0.76","0.64","-0.33","0.28999999999999998","0.96","-0.23","0.83"]},"columns":[{"id":"round","name":"ROUND","type":"character","na":"–","width":75,"align":"center","vAlign":"center","className":"cell"},{"id":"icon","name":"","type":"character","cell":[{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ge.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/nm.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/me.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ad.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/me.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ge.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/sy.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ad.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/fr.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/co.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/st.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/me.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ad.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ge.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/pa.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/nm.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/es.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ha.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ad.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/co.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ge.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/wc.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/es.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/bl.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/me.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/gc.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/es.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/fr.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ge.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/me.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/gc.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ca.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ad.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/wb.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ri.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/me.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/co.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/nm.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ri.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/bl.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ha.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ge.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/st.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ad.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/nm.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ri.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ge.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/bl.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/pa.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/st.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/me.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/gw.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/wb.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ad.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/bl.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/nm.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/co.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/pa.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/wb.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ca.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ri.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/me.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/gc.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/co.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/fr.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/nm.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/sy.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ge.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ri.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ad.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/me.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/bl.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/co.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ca.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/st.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/fr.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/me.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ad.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/gw.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/nm.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/me.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/es.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/nm.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/co.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/wb.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ge.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/bl.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/gc.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ad.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/fr.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/gw.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/bl.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/nm.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ha.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ge.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ad.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/gc.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/me.png","height":"24px"},"children":[]}]}],"na":"–","width":75,"align":"center","vAlign":"center","className":"cell"},{"id":"winner","name":"TIP","type":"character","cell":[{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Geelong"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Brisbane"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["North Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Adelaide"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Geelong"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Adelaide"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Sydney"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat North Melbourne"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Geelong"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Essendon"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Sydney"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Gold Coast"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Adelaide"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Brisbane"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Fremantle"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Sydney"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Collingwood"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Richmond"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["St Kilda"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Carlton"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Brisbane"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Adelaide"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat West Coast"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Geelong"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Hawthorn"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Port Adelaide"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat GWS"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["North Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Bulldogs"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Essendon"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Gold Coast"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Hawthorn"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Port Adelaide"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Adelaide"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat North Melbourne"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Collingwood"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Sydney"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Geelong"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Richmond"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["West Coast"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Bulldogs"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Essendon"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Carlton"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Brisbane"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat St Kilda"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Fremantle"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Gold Coast"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat GWS"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Essendon"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat West Coast"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Fremantle"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat St Kilda"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Geelong"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Collingwood"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat North Melbourne"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Gold Coast"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Port Adelaide"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Carlton"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat GWS"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Adelaide"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Brisbane"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Bulldogs"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Sydney"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Richmond"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Hawthorn"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat West Coast"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Collingwood"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Carlton"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["North Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Port Adelaide"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Richmond"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Essendon"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Brisbane"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Gold Coast"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Hawthorn"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Sydney"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Geelong"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Fremantle"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["St Kilda"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat GWS"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Adelaide"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Bulldogs"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["North Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Fremantle"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Richmond"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Gold Coast"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Geelong"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Essendon"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Brisbane"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Collingwood"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Port Adelaide"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Sydney"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["St Kilda"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Hawthorn"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Adelaide"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["GWS"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat West Coast"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Bulldogs"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Carlton"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Adelaide"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Gold Coast"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Brisbane"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Hawthorn"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["North Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat GWS"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Collingwood"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Essendon"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Port Adelaide"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat West Coast"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Bulldogs"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat St Kilda"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Carlton"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Sydney"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Richmond"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Fremantle"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Geelong"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Gold Coast"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Bulldogs"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Collingwood"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat St Kilda"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Fremantle"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Essendon"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["North Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Brisbane"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Sydney"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat West Coast"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Geelong"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Port Adelaide"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Richmond"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Carlton"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Adelaide"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat GWS"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Hawthorn"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Brisbane"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Sydney"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Collingwood"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Gold Coast"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Carlton"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat West Coast"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["St Kilda"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Port Adelaide"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Fremantle"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Hawthorn"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Bulldogs"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Adelaide"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Essendon"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["GWS"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Richmond"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["North Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Geelong"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat GWS"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Essendon"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat St Kilda"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["North Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Carlton"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Collingwood"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Fremantle"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Bulldogs"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Hawthorn"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Geelong"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Sydney"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Brisbane"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Port Adelaide"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Gold Coast"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat West Coast"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Adelaide"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Richmond"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Fremantle"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat West Coast"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["GWS"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Sydney"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Brisbane"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Richmond"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["North Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat St Kilda"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Hawthorn"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Essendon"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Geelong"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Bulldogs"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Adelaide"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Port Adelaide"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Gold Coast"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Carlton"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Collingwood"]}]}],"width":175,"align":"left","className":"cell"},{"id":"loser","name":"loser","type":"character","show":false},{"id":"margin","name":"MARGIN","type":"numeric","na":"–","align":"center","vAlign":"center","className":"cell"},{"id":"probability","name":"CHANCE","type":"numeric","format":{"cell":{"digits":0,"percent":true},"aggregated":{"digits":0,"percent":true}},"na":"–","align":"center","vAlign":"center","className":"cell","style":[{"background":"#FEC466","borderRight":"2px solid black"},{"background":"#FEDA85","borderRight":"2px solid black"},{"background":"#FECE74","borderRight":"2px solid black"},{"background":"#FD863D","borderRight":"2px solid black"},{"background":"#FEE595","borderRight":"2px solid black"},{"background":"#FD863D","borderRight":"2px solid black"},{"background":"#FEDA85","borderRight":"2px solid black"},{"background":"#FEDA85","borderRight":"2px solid black"},{"background":"#FEE595","borderRight":"2px solid black"},{"background":"#FEE392","borderRight":"2px solid black"},{"background":"#FEE392","borderRight":"2px solid black"},{"background":"#FEC466","borderRight":"2px solid black"},{"background":"#FC7E3A","borderRight":"2px solid black"},{"background":"#FD9241","borderRight":"2px solid black"},{"background":"#FEDE8B","borderRight":"2px solid black"},{"background":"#FC562C","borderRight":"2px solid black"},{"background":"#FEB956","borderRight":"2px solid black"},{"background":"#FED57E","borderRight":"2px solid black"},{"background":"#FEC96D","borderRight":"2px solid black"},{"background":"#FEB44F","borderRight":"2px solid black"},{"background":"#FEDE8B","borderRight":"2px solid black"},{"background":"#FEDC88","borderRight":"2px solid black"},{"background":"#FEDC88","borderRight":"2px solid black"},{"background":"#FD9241","borderRight":"2px solid black"},{"background":"#FC5E2F","borderRight":"2px solid black"},{"background":"#FDA246","borderRight":"2px solid black"},{"background":"#FD9241","borderRight":"2px solid black"},{"background":"#FEE595","borderRight":"2px solid black"},{"background":"#FEE595","borderRight":"2px solid black"},{"background":"#FEC96D","borderRight":"2px solid black"},{"background":"#FEC060","borderRight":"2px solid black"},{"background":"#FDA547","borderRight":"2px solid black"},{"background":"#FECE74","borderRight":"2px solid black"},{"background":"#FEE899","borderRight":"2px solid black"},{"background":"#FD9D45","borderRight":"2px solid black"},{"background":"#FC562C","borderRight":"2px solid black"},{"background":"#FEE18F","borderRight":"2px solid black"},{"background":"#FC562C","borderRight":"2px solid black"},{"background":"#FDAD4A","borderRight":"2px solid black"},{"background":"#FDAD4A","borderRight":"2px solid black"},{"background":"#FEDC88","borderRight":"2px solid black"},{"background":"#FD863D","borderRight":"2px solid black"},{"background":"#FEDC88","borderRight":"2px solid black"},{"background":"#FC522B","borderRight":"2px solid black"},{"background":"#FC6632","borderRight":"2px solid black"},{"background":"#FEE392","borderRight":"2px solid black"},{"background":"#FDAA49","borderRight":"2px solid black"},{"background":"#FD9642","borderRight":"2px solid black"},{"background":"#FEEA9C","borderRight":"2px solid black"},{"background":"#FED57E","borderRight":"2px solid black"},{"background":"#FEDA85","borderRight":"2px solid black"},{"background":"#FEC96D","borderRight":"2px solid black"},{"background":"#FEE595","borderRight":"2px solid black"},{"background":"#FD8A3E","borderRight":"2px solid black"},{"background":"#FD9241","borderRight":"2px solid black"},{"background":"#FC6632","borderRight":"2px solid black"},{"background":"#FED37B","borderRight":"2px solid black"},{"background":"#FEDC88","borderRight":"2px solid black"},{"background":"#FEDE8B","borderRight":"2px solid black"},{"background":"#FEB652","borderRight":"2px solid black"},{"background":"#FD9D45","borderRight":"2px solid black"},{"background":"#FEB956","borderRight":"2px solid black"},{"background":"#FEC060","borderRight":"2px solid black"},{"background":"#FEB44F","borderRight":"2px solid black"},{"background":"#FEB652","borderRight":"2px solid black"},{"background":"#FEB652","borderRight":"2px solid black"},{"background":"#FED57E","borderRight":"2px solid black"},{"background":"#FC6632","borderRight":"2px solid black"},{"background":"#FECE74","borderRight":"2px solid black"},{"background":"#FC7136","borderRight":"2px solid black"},{"background":"#FC6230","borderRight":"2px solid black"},{"background":"#FC5A2E","borderRight":"2px solid black"},{"background":"#FED37B","borderRight":"2px solid black"},{"background":"#FEB44F","borderRight":"2px solid black"},{"background":"#FDA246","borderRight":"2px solid black"},{"background":"#FEBD5C","borderRight":"2px solid black"},{"background":"#FC6D34","borderRight":"2px solid black"},{"background":"#FD9241","borderRight":"2px solid black"},{"background":"#FEEA9C","borderRight":"2px solid black"},{"background":"#FEE899","borderRight":"2px solid black"},{"background":"#FC7938","borderRight":"2px solid black"},{"background":"#FED781","borderRight":"2px solid black"},{"background":"#FD8A3E","borderRight":"2px solid black"},{"background":"#FEE899","borderRight":"2px solid black"},{"background":"#FEB652","borderRight":"2px solid black"},{"background":"#FC6230","borderRight":"2px solid black"},{"background":"#FC7136","borderRight":"2px solid black"},{"background":"#FD9642","borderRight":"2px solid black"},{"background":"#FEBD5C","borderRight":"2px solid black"},{"background":"#FC7136","borderRight":"2px solid black"},{"background":"#FC7136","borderRight":"2px solid black"},{"background":"#FEBD5C","borderRight":"2px solid black"},{"background":"#FDA547","borderRight":"2px solid black"},{"background":"#FED57E","borderRight":"2px solid black"},{"background":"#FED37B","borderRight":"2px solid black"},{"background":"#FC5A2E","borderRight":"2px solid black"},{"background":"#FEDC88","borderRight":"2px solid black"},{"background":"#FC7938","borderRight":"2px solid black"}]},{"id":"result","name":"ACCURACY","type":"numeric","cell":[{"name":"img","attribs":{"src":"images/qm.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/qm.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]}],"na":"–","align":"center","vAlign":"center","className":"cell"},{"id":"abserr","name":"MAE","type":"numeric","format":{"cell":{"digits":0},"aggregated":{"digits":0}},"na":"–","align":"center","vAlign":"center","className":"cell"},{"id":"bits","name":"BITS","type":"character","format":{"cell":{"digits":2},"aggregated":{"digits":2}},"na":"–","align":"center","vAlign":"center","className":"cell"}],"columnGroups":[{"name":"Predictions","columns":["round","icon","winner","margin","probability"]},{"name":"Results","columns":["result","abserr","bits"]}],"sortable":false,"defaultPageSize":10,"showPageInfo":false,"highlight":true,"borderless":true,"theme":{"borderColor":"white","headerStyle":{"borderBottom":"2px solid black","fontWeight":"normal"},"groupHeaderStyle":{"fontSize":20,"fontWeight":"bold"},"rowStyle":{"borderBottom":"1px solid gray"}},"dataKey":"5bcf4964da1d193e73369a2c1c011530"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div id="faq" class="section level3">
+<h3>FAQ</h3>
+<details>
+<summary>
+<strong>How does it work?</strong>
+</summary>
+<p>There are three elements to each prediction in the table:
+<strong>tip</strong>, the team the model is tipping to win;
+<strong>margin</strong>, the amount of points the model is tipping that
+team to win by; and <strong>chance</strong>, the percentage likelihood
+of the tipped team winning by any margin. The table also includes
+methods of evaluating all three elements of the tip. These are discussed
+in detail in the other FAQs.</p>
+The model is still in development and as such I am not currently
+releasing the details of how it makes predictions, but I may decide to
+do so in the future. You are welcome to use the information below as you
+see fit, but please note that you do so at your own risk. I do not
+recommend or encourage the use of this information for betting.
+</details>
+<details>
+<summary>
+<strong>What is accuracy?</strong>
+</summary>
+<p><strong>Accuracy</strong>, quite simply, records whether the tip was
+right or wrong. If the team being tipped to win the game does win, you
+will see a green tick. For any other result you will see a red cross.
+Until the result is known, you will see a black question mark.</p>
+<p>Most users of a tipping model will be primarily concerned with how
+often it correctly picks the winning team. Accuracy provides a direct
+answer to this question.</p>
+However, past accuracy is not always the best predictor of future
+accuracy. This is why other methods of evaluation are included.
+</details>
+<details>
+<summary>
+<strong>What is MAE?</strong>
+</summary>
+<p>The acronym <strong>MAE</strong> stands for <strong>Mean Absolute
+Error</strong>.</p>
+<p>The error of a tip is the amount by which the real-world margin
+differs from the predicted margin. For example, if the model tips the
+home team to win by 20 points, and they instead win by 35, the error for
+that tip will be 15. If they win by 5, it will be -15.</p>
+<p>The absolute error is the same number, but is always a positive
+value. In the scenario above, whether the home team wins by 35 or 5, the
+absolute error of the tip will be 15.</p>
+<p>Therefore, <strong>the mean absolute error is the average number of
+points by which the margin prediction was wrong.</strong> The lower the
+MAE, the better the model.</p>
+<p>In comparison to accuracy, MAE is a superior predictor of future
+accuracy. Why is this?</p>
+<p>Imagine a match with tips provided by two models. Model A predicts
+the home team will win by 2 points. Model B predicts the away team will
+win by 30 points. The match is played, and the away team wins by 4
+points.</p>
+<p>Model A better predicted the outcome of the match - it was only 6
+points off, while Model B missed by 26. But, Model B predicted the right
+team, and Model A the wrong one. This would be reflected in MAE, but the
+<em>accuracy</em> would incorrectly report Model B as superior.</p>
+This is an outcome that, understandably, can feel counter-intuitive. <a
+href="http://www.matterofstats.com/mafl-stats-journal/2017/6/9/tipping-accuracy-vs-mae-as-a-footy-forecaster-metric">If
+you’re interested in reading more, I highly recommend Tony Corke’s
+article on the topic on his website, Matter of Stats.</a>
+</details>
+<details>
+<summary>
+<strong>What are bits?</strong>
+</summary>
+<p>The <strong>bits</strong> measurement evaluates ‘chance’, the
+probability of the tipped team winning the match by any margin.</p>
+<p>If the tip is accurate, then the model will be awarded some value of
+bits, depending on how probable the model declared the tip to be. The
+more confident the model is in its tip, the more bits it will receive if
+the tip is correct.</p>
+<p>However, the same is true in reverse. If the tip is inaccurate, the
+model loses some value of bits, and this value grows larger depending on
+how confident the model was in the faulty prediction. A draw result also
+sees the model lose bits, albeit not as many.</p>
+<p>As such, bits provides something of a compromise between accuracy and
+MAE. It’s a score that goes up or down depending on the real world
+outcome of the match, but with the acknowledgement that the confidence
+in a prediction is just as important as the prediction itself.</p>
+Bits are used to score the Monash University Probabilistic Footy Tipping
+Competition. <a
+href="https://probabilistic-footy.monash.edu/~footy/about.shtml#info">You
+can find more information on how they are calculated on their
+website.</a>
+</details>
+<details>
+<summary>
+<strong>What about past years?</strong>
+</summary>
+The model has been in operation since AFLW Season 2022-A. <a
+href="https://www.databyjosh.com/past-aflw-tips">Click here for tips
+from past seasons.</a>
+</details>
+<p> </p>
+<p><strong>Last updated:</strong> 6:50pm, 24 Nov 2023 (AEDT).</p>
+</div>
+</div>
+
+<hr />
+<p style="text-align: center;"><b>Feedback, corrections, coding tips, questions and suggestions are always welcome.</b></p>
+<p style="text-align: center;"><b><a href="mailto:josh@databyjosh.com">Email</a> | <a href="https://twitter.com/databyjosh">Twitter</a></b></p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
