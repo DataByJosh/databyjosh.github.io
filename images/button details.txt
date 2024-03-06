@@ -1,0 +1,5 @@
+bottom layer - pure white layer, layer > new fill layer > colour > white
+image layer - image at 25% opacity, black & white
+text - lemon milk medium for title text, regular for subtitle, font colour 323232 or 50/50/50
+
+row height is 180p. row width 750p. 25:6 aspect ratio. gaps between images are 12pm. 2 image buttons 369 width each.
